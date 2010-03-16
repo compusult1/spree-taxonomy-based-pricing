@@ -3,10 +3,6 @@
   <% products.each do |product| %>
     <% column_count += 1 %>
     <% column_count = 1 if column_count == 7 %>
-
-<% debugger %>
-
-
     <% if Spree::Config[:show_zero_stock_products] || product.has_stock? %>
       <li id="product_<%= product.id %>">
 			  <% if taxon.nil? %>
