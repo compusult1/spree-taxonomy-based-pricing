@@ -1,0 +1,11 @@
+<div id="taxonomies" class="sidebar-item">
+<% taxons = (@taxon.nil? or @taxon.parent.nil?) ? Taxon.roots : @taxon.parent.children %>
+<% taxons.each do |taxon| %>
+  <ul class="navigation-list">
+	  <li<%= ' class="current"' if @taxon && @taxon == taxon %>><%= link_to taxon.name, seo_url(taxon), :class => 'root' %></li>
+	  <% taxon.children.each do |taxon_child| %>
+	    <li<%= ' class="current"' if @taxon and ([@taxon] + @taxon.ancestors).include?(taxon_child) %>><%= link_to taxon_child.name, seo_url(taxon_child) %></li>
+	  <% end %>
+	</ul>
+<% end %>
+</div>

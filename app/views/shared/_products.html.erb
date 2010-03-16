@@ -1,0 +1,23 @@
+<ul class="product-listing">
+  <% column_count = 0 %>
+  <% products.each do |product| %>
+    <% column_count += 1 %>
+    <% column_count = 1 if column_count == 7 %>
+
+<% debugger %>
+
+
+    <% if Spree::Config[:show_zero_stock_products] || product.has_stock? %>
+      <li id="product_<%= product.id %>">
+			  <% if taxon.nil? %>
+		    	  <%= link_to small_image(product), product %>
+					  <%= link_to product.name + "<span class='price selling'>#{catalog_price(product, taxon)}</span>", product, :class => 'info' %>
+		    <% else %>
+	       		<%= link_to small_image(product), seo_url(taxon, product) %>
+					  <%= link_to product.name + "<span class='price selling'>#{catalog_price(product, taxon)}</span>", seo_url(taxon, product), :class => 'info' %>
+			  <% end %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+<hr class="space" />
